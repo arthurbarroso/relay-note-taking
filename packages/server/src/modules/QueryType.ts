@@ -5,7 +5,8 @@ import {
   GraphQLID,
 } from 'graphql';
 import { connectionArgs, globalIdField, fromGlobalId } from 'graphql-relay';
-import { UserType, UserConnection } from './rootType';
+import { NoteType, NoteConnection, UserType, UserConnection } from './rootType';
+import { loadNotes, load } from './notes/NoteLoader';
 import { loadUsers } from './users/UserLoader';
 import { nodeField } from '../types/nodeInterface';
 import GraphQLContext from '../types/GraphQLContext';
@@ -30,6 +31,27 @@ export default new GraphQLObjectType<any, GraphQLContext, any>({
         },
       },
       resolve: async (_, args, context) => loadUsers(context, args),
+    },
+
+    note: {
+      type: NoteType,
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLID),
+        },
+      },
+      resolve: async (_, { id }, context) => load(context, fromGlobalId(id).id),
+    },
+
+    notes: {
+      type: GraphQLNonNull(NoteConnection.connectionType),
+      args: {
+        ...connectionArgs,
+        search: {
+          type: GraphQLString,
+        },
+      },
+      resolve: async (_, args, context) => loadNotes(context, args),
     },
   }),
 });

@@ -3,6 +3,7 @@ import DataLoader from 'dataloader';
 import { ConnectionArguments } from 'graphql-relay';
 import User, { UserModel } from './UserModel';
 import GraphQLContext from '../../types/GraphQLContext';
+import Note, { NoteModel } from '../notes/NoteModel';
 
 export default class Userind {
   id: string;
@@ -76,3 +77,16 @@ export const loadUsers = async (
 
   return t;
 };
+
+export async function getNotes(
+  parentValues: any,
+  args: any,
+  context: any,
+  info: any
+): Promise<NoteModel> {
+  const notes = await Note.find({ author: parentValues._id });
+  if (!notes) {
+    return null;
+  }
+  return notes;
+}

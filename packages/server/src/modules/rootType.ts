@@ -15,6 +15,10 @@ import { nodeInterface } from '../types/nodeInterface';
 import { connectionDefinitions } from '../types/ConnectionType';
 
 import { UserModel } from './users/UserModel';
+import { NoteModel } from './notes/NoteModel';
+
+import { findAuthor } from './notes/NoteLoader';
+import { getNotes } from './users/UserLoader';
 
 type UserConfigType = GraphQLObjectTypeConfig<UserModel, GraphQLContext>;
 
@@ -42,11 +46,15 @@ const UserTypeConfig: UserConfigType = {
     },
     createdAt: {
       type: GraphQLString,
-      resolve: todo => todo.createdAt,
+      resolve: user => user.createdAt,
     },
     updatedAt: {
       type: GraphQLString,
-      resolve: todo => todo,
+      resolve: user => user.updatedAt,
+    },
+    notes: {
+      type: GraphQLList(NoteType),
+      resolve: user => getNotes(user, '', '', ''),
     },
   }),
   interfaces: () => [nodeInterface],
@@ -57,4 +65,60 @@ export const UserType = new GraphQLObjectType(UserTypeConfig);
 export const UserConnection = connectionDefinitions({
   name: 'User',
   nodeType: UserType,
+});
+
+type NoteConfigType = GraphQLObjectTypeConfig<NoteModel, GraphQLContext>;
+
+const NoteTypeConfig: NoteConfigType = {
+  name: 'Note',
+  description: 'Represents Note',
+  fields: () => ({
+    id: globalIdField('Note'),
+    _id: {
+      type: GraphQLNonNull(GraphQLString),
+      description: 'MongoDB _id',
+      resolve: note => note._id,
+    },
+    title: {
+      type: GraphQLString,
+      resolve: note => note.title,
+    },
+    content: {
+      type: GraphQLString,
+      resolve: note => note.content,
+    },
+    important: {
+      type: GraphQLBoolean,
+      resolve: note => note.important,
+    },
+    createdAt: {
+      type: GraphQLString,
+      resolve: note => note.createdAt,
+    },
+    updatedAt: {
+      type: GraphQLString,
+      resolve: note => note.updatedAt,
+    },
+    author: {
+      type: GraphQLNonNull(UserType),
+      resolve: note => findAuthor(note, '', '', ''),
+    },
+  }),
+  interfaces: () => [nodeInterface],
+};
+
+export const NoteType = new GraphQLObjectType(NoteTypeConfig);
+
+export const NoteConnection = connectionDefinitions({
+  name: 'Note',
+  nodeType: NoteType,
+});
+
+export const AuthType = new GraphQLObjectType({
+  name: 'AuthType',
+  fields: {
+    token: {
+      type: GraphQLNonNull(GraphQLString),
+    },
+  },
 });
