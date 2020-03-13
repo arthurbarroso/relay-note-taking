@@ -4,6 +4,9 @@
   "private": true,
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "server:dev": "yarn workspace server dev"
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
