@@ -54,4 +54,12 @@ module.exports = {
     "no-use-before-define": "off",
     "react/jsx-filename-extension": "off"
   },
+  "overrides": [
+    {
+      "files": ["**/*.tsx"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ]
 };
