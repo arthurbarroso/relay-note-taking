@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { createRefetchContainer } from 'react-relay';
+import { createRefetchContainer, RelayRefetchProp } from 'react-relay';
 // import { Link } from 'react-router-dom';
 
 // @ts-ignore
@@ -11,21 +11,21 @@ import { Container, Content } from './styles/RefetchStyles';
 import createQueryRenderer from '../golden-stack/createQueryRenderer';
 import Layout from './_layout';
 
+import { NoteRefetch_query } from './__generated__/NoteRefetch_query.graphql';
+
+interface RelayProps {
+  query: NoteRefetch_query;
+  relay: RelayRefetchProp;
+  isLoading: boolean;
+}
+
 let qTerms = '';
-// @ts-ignore
-function NoteRefetch(props) {
+function NoteRefetch(props: RelayProps) {
   const [terms, setTerms] = useState('');
   const [count, setCount] = useState(12);
-  // console.log(props)
-
-  useEffect(() => {
-    qTerms = terms;
-  }, [terms]);
-
-  console.log(props); //eslint-disable-line
 
   function loadMore() {
-    if (!props.history.isLoading) {
+    if (!props.isLoading) {
       props.relay.refetch(
         { search: qTerms, first: count },
         null,
@@ -34,22 +34,36 @@ function NoteRefetch(props) {
         },
         { force: true }
       );
-    } else {
-      console.log('loadmore else'); //eslint-disable-line
     }
   }
 
   window.onscroll = () => {
     if (window.scrollY <= 40) {
       loadMore();
-    } else {
-      console.log('on scroll else');
     }
   };
 
+  useEffect(() => {
+    qTerms = terms;
+    loadMore();
+  }, [terms]);
+
   return (
     <Container>
-      <Content />
+      <input
+        type="text"
+        value={terms}
+        onChange={e => setTerms(e.target.value)}
+        placeholder="query terms"
+      />
+      <Content>
+        {props?.query.notes.edges.map(item => (
+          <div key={item?.node?.id}>
+            <h1>{item?.node?.title}</h1>
+            <h2>{item?.node?.content}</h2>
+          </div>
+        ))}
+      </Content>
     </Container>
   );
 }

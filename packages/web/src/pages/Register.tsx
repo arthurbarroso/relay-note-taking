@@ -20,8 +20,8 @@ const mutation = graphql`
     }
   }
 `;
-// @ts-ignore
-function commit(username, email, password) {
+
+function commit(username: string, email: string, password: string) {
   return commitMutation(environment, {
     mutation,
     variables: {

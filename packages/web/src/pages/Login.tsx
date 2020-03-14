@@ -17,8 +17,7 @@ const mutation = graphql`
   }
 `;
 
-// @ts-ignore
-function commit(username, password, setToken) {
+function commit(username: String, password: String, setToken: Function) {
   return commitMutation(environment, {
     mutation,
     variables: {
@@ -34,21 +33,15 @@ function commit(username, password, setToken) {
 }
 
 function LoginScreen() {
-  const [token, setToken] = useState({
-    login: {
-      token: '',
-    },
-  });
+  const [token, setToken] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (token !== null && token.login.token.length > 0) {
-      if (token.login.token !== null) {
-        const bearer = token?.login.token;
-        // console.log('token', bearer);
-        // localStorage.setItem('token', bearer);
-      }
+    if (token.length > 0) {
+      console.log(token); // eslint-disable-line
+      // console.log('token', bearer);
+      // localStorage.setItem('token', bearer);
     }
   }, [token]);
 
