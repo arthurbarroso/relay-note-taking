@@ -6,6 +6,8 @@ import { createRefetchContainer } from 'react-relay';
 // @ts-ignore
 import graphql from 'babel-plugin-relay/macro';
 
+import { Container, Content } from './styles/RefetchStyles';
+
 import createQueryRenderer from '../golden-stack/createQueryRenderer';
 import Layout from './_layout';
 
@@ -45,7 +47,11 @@ function NoteRefetch(props) {
     }
   };
 
-  return <h1>notes</h1>;
+  return (
+    <Container>
+      <Content />
+    </Container>
+  );
 }
 
 const NoteRefetchContainer = createRefetchContainer(
