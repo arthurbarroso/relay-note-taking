@@ -14,14 +14,14 @@ const RouteWrapper: React.FC<Routes> = ({
   exact,
   isPrivate,
 }) => {
-  const signed = true; // localStorage.getItem('token');
+  const signed = false; // localStorage.getItem('token');
 
   if (!signed && isPrivate) {
     return <Redirect from="/" to={{ pathname: '/login' }} />;
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/todos" />;
+    return <Redirect to="/" />;
   }
 
   return <Route component={component} path={path} exact={exact} />;
