@@ -7,24 +7,33 @@ import environment from '../environment';
 
 import { Container, Content, Wrapper } from './styles/RefetchStyles';
 
-import { NoteDetailQuery } from './__generated__/NoteDetailQuery.graphql';
-
-interface Detail {
-  match: {
-    params: {
-      id: String;
-    };
-  };
-}
+import {
+  NoteDetailQuery,
+  NoteDetailQueryResponse,
+} from './__generated__/NoteDetailQuery.graphql';
 
 interface RelayProps {
-  query: NoteDetailQuery;
   match: {
     params: {
       id: String;
     };
   };
 }
+
+interface Renderer {
+  query: NoteDetailQueryResponse;
+}
+
+const NoteRenderer = (props: Renderer) => {
+  const { query } = props;
+  const { note } = query;
+  return (
+    <>
+      <h1>{note?.title}</h1>
+      <p>{note?.content}</p>
+    </>
+  );
+};
 
 function NoteDetailScreen(thisProps: RelayProps) {
   const { match } = thisProps;
@@ -55,13 +64,13 @@ function NoteDetailScreen(thisProps: RelayProps) {
             }
 
             // @ts-ignore
-            return <h1>{props.note.title}</h1>;
+            return <NoteRenderer query={props} />;
           }}
         />
       </Content>
       <Wrapper>
-        <Link to="/refetch">
-          <button type="button">BACK TO TODO LIST</button>
+        <Link to="/notes">
+          <button type="button">BACK TO NOTE LIST</button>
         </Link>
       </Wrapper>
     </Container>

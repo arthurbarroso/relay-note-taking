@@ -13,7 +13,7 @@ export default function Routes() {
       <Route exact path="/" component={Landing} isPrivate={false} />
       <Route path="/login" component={Login} isPrivate={false} />
       <Route path="/signup" component={Register} isPrivate={false} />
-      <Route path="/refetch" component={NoteRefetch} isPrivate={false} />
+      <Route exact path="/notes" component={NoteRefetch} isPrivate={false} />
       <Route exact path="/notes/:id" component={NoteDetail} isPrivate={false} />
     </Switch>
   );

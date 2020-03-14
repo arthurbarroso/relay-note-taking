@@ -57,13 +57,13 @@ function NoteRefetch(props: RelayProps) {
           onChange={e => setTerms(e.target.value)}
           placeholder="query by title"
         />
-        <button onClick={() => loadMore()} type="button">
+        <button className="loadbutton" onClick={() => loadMore()} type="button">
           load more
         </button>
         {props?.query.notes.edges.map(item => (
           <div key={item?.node?.id}>
             <Link to={`/notes/${item?.node?.id}`}>
-              <h1>{item?.node?.title}</h1>
+              <button type="button">{item?.node?.title}</button>
             </Link>
           </div>
         ))}

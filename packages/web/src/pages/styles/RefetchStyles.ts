@@ -28,7 +28,7 @@ export const Content = styled.div`
     padding: 0 3%;
   }
 
-  button {
+  .loadbutton {
     width: 100%;
     background: #f57e42;
     border-radius: 4px;
@@ -41,6 +41,28 @@ export const Content = styled.div`
 
     &:hover {
       background: ${darken(0.03, '#f57e42')};
+    }
+  }
+
+  a {
+    width: 100%;
+    max-width: 315px;
+    margin-top: 9%;
+
+    button {
+      width: 100%;
+      background: #1eb36b;
+      border-radius: 4px;
+      height: 32px;
+      border: 0;
+      margin-bottom: 3%;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #fff;
+
+      &:hover {
+        background: ${darken(0.03, '#1eb36b')};
+      }
     }
   }
 `;
