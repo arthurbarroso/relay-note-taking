@@ -10,7 +10,6 @@ export default function Header() {
         <h1>Notee</h1>
       </Link>
       <div className="wrapper">
-        <Link to="/">About</Link>
         <Link to="/login">
           <button type="button">Login</button>
         </Link>

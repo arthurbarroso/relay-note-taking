@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { createRefetchContainer, RelayRefetchProp } from 'react-relay';
 // import { Link } from 'react-router-dom';
@@ -9,7 +10,6 @@ import graphql from 'babel-plugin-relay/macro';
 import { Container, Content } from './styles/RefetchStyles';
 
 import createQueryRenderer from '../golden-stack/createQueryRenderer';
-import Layout from './_layout';
 
 import { NoteRefetch_query } from './__generated__/NoteRefetch_query.graphql';
 
@@ -50,17 +50,21 @@ function NoteRefetch(props: RelayProps) {
 
   return (
     <Container>
-      <input
-        type="text"
-        value={terms}
-        onChange={e => setTerms(e.target.value)}
-        placeholder="query terms"
-      />
       <Content>
+        <input
+          type="text"
+          value={terms}
+          onChange={e => setTerms(e.target.value)}
+          placeholder="query by title"
+        />
+        <button onClick={() => loadMore()} type="button">
+          load more
+        </button>
         {props?.query.notes.edges.map(item => (
           <div key={item?.node?.id}>
-            <h1>{item?.node?.title}</h1>
-            <h2>{item?.node?.content}</h2>
+            <Link to={`/notes/${item?.node?.id}`}>
+              <h1>{item?.node?.title}</h1>
+            </Link>
           </div>
         ))}
       </Content>
@@ -108,6 +112,4 @@ const Renderer = createQueryRenderer(NoteRefetchContainer, NoteRefetch, {
   variables: { first: 9, search: qTerms },
 });
 
-export default function NoteRefetchRenderer() {
-  return <Layout Child={Renderer} />;
-}
+export default Renderer;

@@ -1,30 +1,40 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
-interface Routes {
-  path: string;
+import DefaultLayout from '../pages/_layout';
+
+type Props = {
+  component: React.ReactType;
+  isPrivate?: boolean;
   exact?: boolean;
-  component: React.FC;
-  isPrivate: boolean;
-}
+  path: string;
+};
 
-const RouteWrapper: React.FC<Routes> = ({
-  component,
-  path,
-  exact,
+export default function RouteWrapper({
+  component: Component,
   isPrivate,
-}) => {
-  const signed = false; // localStorage.getItem('token');
+  ...rest
+}: Props) {
+  const signed = false;
 
   if (!signed && isPrivate) {
-    return <Redirect from="/" to={{ pathname: '/login' }} />;
-  }
-
-  if (signed && !isPrivate) {
     return <Redirect to="/" />;
   }
 
-  return <Route component={component} path={path} exact={exact} />;
-};
+  if (signed && !isPrivate) {
+    return <Redirect to="/dashboard" />;
+  }
 
-export default RouteWrapper;
+  const Layout = DefaultLayout;
+
+  return (
+    <Route
+      {...rest}
+      render={props => (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      )}
+    />
+  );
+}

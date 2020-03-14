@@ -5,6 +5,7 @@ import Landing from '../pages/Landing';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import NoteRefetch from '../pages/NoteRefetch';
+import NoteDetail from '../pages/NoteDetail';
 
 export default function Routes() {
   return (
@@ -13,6 +14,7 @@ export default function Routes() {
       <Route path="/login" component={Login} isPrivate={false} />
       <Route path="/signup" component={Register} isPrivate={false} />
       <Route path="/refetch" component={NoteRefetch} isPrivate={false} />
+      <Route exact path="/notes/:id" component={NoteDetail} isPrivate={false} />
     </Switch>
   );
 }

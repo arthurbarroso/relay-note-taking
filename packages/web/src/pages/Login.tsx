@@ -7,8 +7,6 @@ import { Container, Content } from './styles/AuthStyles';
 import environment from '../environment';
 // import history from '../routes/history';
 
-import Layout from './_layout';
-
 const mutation = graphql`
   mutation LoginMutation($input: AuthInput!) {
     login(input: $input) {
@@ -32,7 +30,7 @@ function commit(username: String, password: String, setToken: Function) {
   });
 }
 
-function LoginScreen() {
+export default function Login() {
   const [token, setToken] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -80,8 +78,4 @@ function LoginScreen() {
       </Container>
     </>
   );
-}
-
-export default function Login() {
-  return <Layout Children={LoginScreen} />;
 }

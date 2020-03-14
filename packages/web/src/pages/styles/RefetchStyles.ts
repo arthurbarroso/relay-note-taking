@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-bottom: 10%;
 `;
 
 export const Content = styled.div`
@@ -25,6 +26,22 @@ export const Content = styled.div`
     color: #333;
     margin-bottom: 3%;
     padding: 0 3%;
+  }
+
+  button {
+    width: 100%;
+    background: #f57e42;
+    border-radius: 4px;
+    height: 32px;
+    border: 0;
+    margin-bottom: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+
+    &:hover {
+      background: ${darken(0.03, '#f57e42')};
+    }
   }
 `;
 
@@ -53,22 +70,6 @@ export const Wrapper = styled.div`
       &:hover {
         background: ${darken(0.03, '#1eb36b')};
       }
-    }
-  }
-
-  button {
-    width: 100%;
-    background: #f57e42;
-    border-radius: 4px;
-    height: 32px;
-    border: 0;
-    margin-bottom: 3%;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #fff;
-
-    &:hover {
-      background: ${darken(0.03, '#f57e42')};
     }
   }
 `;

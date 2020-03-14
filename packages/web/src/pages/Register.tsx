@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 import { Container, Content } from './styles/AuthStyles';
 import environment from '../environment';
 
-import Layout from './_layout';
-
 const mutation = graphql`
   mutation RegisterMutation($input: createUserInput!) {
     createUser(input: $input) {
@@ -36,7 +34,7 @@ function commit(username: string, email: string, password: string) {
   });
 }
 
-function RegisterScreen() {
+export default function RegisterScreen() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -81,8 +79,4 @@ function RegisterScreen() {
       </Content>
     </Container>
   );
-}
-
-export default function Register() {
-  return <Layout Children={RegisterScreen} />;
 }
