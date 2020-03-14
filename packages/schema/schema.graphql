@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Fri Mar 13 2020 15:18:27 GMT-0300 (Brasilia Standard Time)
+# timestamp: Sat Mar 14 2020 16:01:56 GMT-0300 (Brasilia Standard Time)
 
 input AuthInput {
   username: String
@@ -38,7 +38,7 @@ type createUserPayload {
 }
 
 type Mutation {
-  UserCreationMutation(input: createUserInput!): createUserPayload
+  createUser(input: createUserInput!): createUserPayload
   createNote(input: createNoteInput!): createNotePayload
   login(input: AuthInput): AuthType
 }

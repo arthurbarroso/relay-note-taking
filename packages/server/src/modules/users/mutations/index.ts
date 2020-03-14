@@ -1,3 +1,3 @@
 import UserCreationMutation from './UserCreationMutation';
 
-export default { UserCreationMutation };
+export default { createUser: UserCreationMutation };

@@ -40,10 +40,6 @@ const UserTypeConfig: UserConfigType = {
       type: GraphQLString,
       resolve: user => user.email,
     },
-    age: {
-      type: GraphQLInt,
-      resolve: user => user.age,
-    },
     createdAt: {
       type: GraphQLString,
       resolve: user => user.createdAt,

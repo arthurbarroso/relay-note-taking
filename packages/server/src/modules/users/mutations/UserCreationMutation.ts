@@ -10,7 +10,6 @@ interface userArguments {
   username: string;
   password: string;
   email: string;
-  age: Number;
 }
 
 const mutation = mutationWithClientMutationId({
@@ -22,15 +21,12 @@ const mutation = mutationWithClientMutationId({
     email: {
       type: GraphQLNonNull(GraphQLString),
     },
-    age: {
-      type: GraphQLString,
-    },
     password: {
       type: GraphQLNonNull(GraphQLString),
     },
   },
   mutateAndGetPayload: async (args: userArguments) => {
-    const { username, email, password, age } = args;
+    const { username, email, password } = args;
 
     const emailExists = await User.findOne({ email });
     const usernameExists = await User.findOne({ username });
@@ -47,7 +43,6 @@ const mutation = mutationWithClientMutationId({
       username,
       email,
       password: hashed_pass,
-      age,
     });
 
     return {
