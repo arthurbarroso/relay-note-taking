@@ -1,7 +1,7 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
 function fetchQuery(operation: any, variables: any) {
-  return fetch("http://localhost:4000", { //eslint-disable-line
+  return fetch("https://arthurbarroso.tools/", { //eslint-disable-line
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

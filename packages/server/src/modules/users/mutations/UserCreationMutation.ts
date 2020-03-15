@@ -57,7 +57,6 @@ const mutation = mutationWithClientMutationId({
         const newUser = await load(context, id);
 
         if (!newUser) return null;
-
         return {
           cursor: toGlobalId('User', newUser._id),
           node: newUser,

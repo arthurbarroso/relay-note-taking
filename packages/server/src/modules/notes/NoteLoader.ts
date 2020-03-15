@@ -52,8 +52,8 @@ export const load = async (context, id): Promise<NoteModel> => {
 };
 
 export const loadNotes = async (
-  context: GraphQLContext,
-  args: ConnectionArguments
+  context?: GraphQLContext,
+  args?: ConnectionArguments
 ) => {
   const userId = await getUser(context.req);
   const where = args.search

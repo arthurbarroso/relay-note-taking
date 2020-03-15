@@ -49,8 +49,8 @@ const UserTypeConfig: UserConfigType = {
       resolve: user => user.updatedAt,
     },
     notes: {
-      type: GraphQLList(NoteType),
-      resolve: user => getNotes(user, '', '', ''),
+      type: NoteConnection.connectionType,
+      resolve: async user => getNotes(user, '', '', ''),
     },
   }),
   interfaces: () => [nodeInterface],

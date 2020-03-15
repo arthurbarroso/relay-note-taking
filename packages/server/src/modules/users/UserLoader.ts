@@ -1,9 +1,10 @@
 import { mongooseLoader, connectionFromMongoCursor } from "@entria/graphql-mongoose-loader"; //eslint-disable-line
 import DataLoader from 'dataloader';
-import { ConnectionArguments } from 'graphql-relay';
+import { ConnectionArguments, toGlobalId } from 'graphql-relay';
 import User, { UserModel } from './UserModel';
 import GraphQLContext from '../../types/GraphQLContext';
 import Note, { NoteModel } from '../notes/NoteModel';
+import { load as noteloader } from '../notes/NoteLoader';
 
 export default class Userind {
   id: string;
@@ -81,9 +82,12 @@ export async function getNotes(
   context: any,
   info: any
 ): Promise<NoteModel> {
-  const notes = await Note.find({ author: parentValues._id });
-  if (!notes) {
-    return null;
-  }
-  return notes;
+  const notes = Note.find({ author: parentValues._id });
+  const t = await connectionFromMongoCursor({
+    cursor: notes,
+    context,
+    args,
+    loader: noteloader,
+  });
+  return t;
 }
