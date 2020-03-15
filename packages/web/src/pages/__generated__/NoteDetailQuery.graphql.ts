@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-/* @relayHash bb9568bad14df52f82c9bb240c6e3862 */
+/* @relayHash 9395b7df1a751b0f3b95b38bff566a5a */
 
 import { ConcreteRequest } from "relay-runtime";
 export type NoteDetailQueryVariables = {
@@ -12,7 +12,6 @@ export type NoteDetailQueryResponse = {
         readonly content: string | null;
         readonly title: string | null;
         readonly _id: string;
-        readonly important: boolean | null;
     } | null;
 };
 export type NoteDetailQuery = {
@@ -31,7 +30,6 @@ query NoteDetailQuery(
     content
     title
     _id
-    important
   }
 }
 */
@@ -88,13 +86,6 @@ v1 = [
         "name": "_id",
         "args": null,
         "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "important",
-        "args": null,
-        "storageKey": null
       }
     ]
   }
@@ -119,10 +110,10 @@ return {
     "operationKind": "query",
     "name": "NoteDetailQuery",
     "id": null,
-    "text": "query NoteDetailQuery(\n  $id: ID!\n) {\n  note(id: $id) {\n    id\n    content\n    title\n    _id\n    important\n  }\n}\n",
+    "text": "query NoteDetailQuery(\n  $id: ID!\n) {\n  note(id: $id) {\n    id\n    content\n    title\n    _id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '66281d59afc4af5988d9081d70422221';
+(node as any).hash = '354dbc9772fba4a0c6a8c5b25a202285';
 export default node;

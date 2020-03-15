@@ -1,12 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
-/* @relayHash 2073936e9ed7c0b670f7250a3e8ef9ef */
+/* @relayHash 28b4a817f9442ee7219dc1a7d6dc25ed */
 
 import { ConcreteRequest } from "relay-runtime";
 export type createUserInput = {
     username: string;
     email: string;
-    age?: string | null;
     password: string;
     clientMutationId?: string | null;
 };

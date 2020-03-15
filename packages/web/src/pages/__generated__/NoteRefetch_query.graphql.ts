@@ -11,7 +11,6 @@ export type NoteRefetch_query = {
                 readonly _id: string;
                 readonly content: string | null;
                 readonly title: string | null;
-                readonly important: boolean | null;
             } | null;
         } | null>;
         readonly pageInfo: {
@@ -122,13 +121,6 @@ const node: ReaderFragment = {
                 {
                   "kind": "ScalarField",
                   "alias": null,
-                  "name": "important",
-                  "args": null,
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
                   "name": "__typename",
                   "args": null,
                   "storageKey": null
@@ -173,5 +165,5 @@ const node: ReaderFragment = {
     }
   ]
 };
-(node as any).hash = '54f77f2c10a9e6f1a2f6ba43cdae044a';
+(node as any).hash = '94385d50c6346bd57d66fb991478aa69';
 export default node;

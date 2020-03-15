@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-/* @relayHash f571d1c64e57f000fd45cb3ef5d8fa0b */
+/* @relayHash 6c8e4e927fc06d442db35d5f82c1824b */
 
 import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
@@ -34,7 +34,6 @@ fragment NoteRefetch_query on Query {
         _id
         content
         title
-        important
         __typename
       }
       cursor
@@ -153,13 +152,6 @@ return {
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "important",
-                    "args": null,
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
                     "name": "__typename",
                     "args": null,
                     "storageKey": null
@@ -219,7 +211,7 @@ return {
     "operationKind": "query",
     "name": "NoteRefetchQuery",
     "id": null,
-    "text": "query NoteRefetchQuery(\n  $first: Int\n  $search: String\n) {\n  ...NoteRefetch_query\n}\n\nfragment NoteRefetch_query on Query {\n  notes(first: $first, search: $search) {\n    edges {\n      node {\n        id\n        _id\n        content\n        title\n        important\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
+    "text": "query NoteRefetchQuery(\n  $first: Int\n  $search: String\n) {\n  ...NoteRefetch_query\n}\n\nfragment NoteRefetch_query on Query {\n  notes(first: $first, search: $search) {\n    edges {\n      node {\n        id\n        _id\n        content\n        title\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { QueryRenderer } from 'react-relay';
 // @ts-ignore
 import graphql from 'babel-plugin-relay/macro';
@@ -7,10 +7,7 @@ import environment from '../environment';
 
 import { Container, Content, Wrapper } from './styles/RefetchStyles';
 
-import {
-  NoteDetailQuery,
-  NoteDetailQueryResponse,
-} from './__generated__/NoteDetailQuery.graphql';
+import { NoteDetailQueryResponse } from './__generated__/NoteDetailQuery.graphql';
 
 interface RelayProps {
   match: {
@@ -50,7 +47,6 @@ function NoteDetailScreen(thisProps: RelayProps) {
                 content
                 title
                 _id
-                important
               }
             }
           `}

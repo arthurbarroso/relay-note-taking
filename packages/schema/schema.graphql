@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sat Mar 14 2020 16:01:56 GMT-0300 (Brasilia Standard Time)
+# timestamp: Sun Mar 15 2020 09:28:11 GMT-0300 (Brasilia Standard Time)
 
 input AuthInput {
   username: String
@@ -13,7 +13,6 @@ type AuthType {
 input createNoteInput {
   title: String!
   content: String!
-  important: Boolean
   clientMutationId: String
 }
 
@@ -26,7 +25,6 @@ type createNotePayload {
 input createUserInput {
   username: String!
   email: String!
-  age: String
   password: String!
   clientMutationId: String
 }
@@ -58,7 +56,6 @@ type Note implements Node {
   _id: String!
   title: String
   content: String
-  important: Boolean
   createdAt: String
   updatedAt: String
   author: User!
@@ -138,7 +135,6 @@ type User implements Node {
   _id: String!
   username: String
   email: String
-  age: Int
   createdAt: String
   updatedAt: String
   notes: [Note]

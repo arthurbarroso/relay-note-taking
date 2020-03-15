@@ -10,8 +10,6 @@ import getUserId from '../../../util/getUser';
 interface noteArguments {
   title: string;
   content: string;
-  important: boolean;
-  author: string;
 }
 
 const mutation = mutationWithClientMutationId({
@@ -23,17 +21,13 @@ const mutation = mutationWithClientMutationId({
     content: {
       type: GraphQLNonNull(GraphQLString),
     },
-    important: {
-      type: GraphQLBoolean,
-    },
   },
   mutateAndGetPayload: async (args: noteArguments, context) => {
-    const { title, content, important } = args;
+    const { title, content } = args;
     const user = await getUserId(context.req);
     const newTodo = await Note.create({
       title,
       content,
-      important,
       author: user,
     });
 

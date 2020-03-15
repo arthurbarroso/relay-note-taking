@@ -3,9 +3,11 @@ import { commitMutation } from 'react-relay';
 // @ts-ignore
 import graphql from 'babel-plugin-relay/macro';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { Container, Content } from './styles/AuthStyles';
 import environment from '../environment';
+import history from '../routes/history';
 
 const mutation = graphql`
   mutation RegisterMutation($input: createUserInput!) {
@@ -27,9 +29,11 @@ function commit(username: string, email: string, password: string) {
     },
     onCompleted: (_, errors) => {
       if (errors) {
+        toast.error('😔 Something went wrong, please try again later');
         return;
       }
-      console.log('registered'); //eslint-disable-line
+      toast.success('🚀 Successfully registered, please sign in!');
+      history.push('/login');
     },
   });
 }

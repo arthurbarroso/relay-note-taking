@@ -4,6 +4,7 @@ import { ConnectionArguments } from 'graphql-relay';
 import Note, { NoteModel } from './NoteModel';
 import User, { UserModel } from '../users/UserModel';
 import GraphQLContext from '../../types/GraphQLContext';
+import getUser from '../../util/getUser';
 
 export default class NoteInterface {
   id: string;
@@ -13,8 +14,6 @@ export default class NoteInterface {
   title: string;
 
   content: string;
-
-  important: boolean;
 
   createdAt: Date;
 
@@ -29,7 +28,6 @@ export default class NoteInterface {
     this.content = data.content;
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
-    this.important = data.done;
     this.author = data.author;
   }
 }
@@ -57,13 +55,17 @@ export const loadNotes = async (
   context: GraphQLContext,
   args: ConnectionArguments
 ) => {
+  const userId = await getUser(context.req);
   const where = args.search
     ? {
       title: { //eslint-disable-line
         $regex: new RegExp(`^${args.search}`, 'ig'), //eslint-disable-line
-      }, //eslint-disable-line
-    } //eslint-disable-line
-    : {};
+      },//eslint-disable-line
+      author: userId, //eslint-disable-line
+    }//eslint-disable-line
+    : { //eslint-disable-line
+      author: userId, //eslint-disable-line
+    }; //eslint-disable-line
   const todos = Note.find(where, { _id: 1 }).sort({
     createdAt: -1,
   });

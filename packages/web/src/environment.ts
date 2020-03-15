@@ -5,7 +5,10 @@ function fetchQuery(operation: any, variables: any) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem("token")}` //eslint-disable-line
+      Authorization: `Bearer ${localStorage.getItem(
+        process.env.STORAGE_ITEM_KEY
+          ? process.env.STORAGE_ITEM_KEY
+          : 'appnoteerelay')}` //eslint-disable-line
     },
     body: JSON.stringify({
       query: operation.text,

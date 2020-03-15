@@ -83,10 +83,6 @@ const NoteTypeConfig: NoteConfigType = {
       type: GraphQLString,
       resolve: note => note.content,
     },
-    important: {
-      type: GraphQLBoolean,
-      resolve: note => note.important,
-    },
     createdAt: {
       type: GraphQLString,
       resolve: note => note.createdAt,

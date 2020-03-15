@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { createRefetchContainer, RelayRefetchProp } from 'react-relay';
-// import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 // @ts-ignore
 import graphql from 'babel-plugin-relay/macro';
@@ -23,6 +23,12 @@ let qTerms = '';
 function NoteRefetch(props: RelayProps) {
   const [terms, setTerms] = useState('');
   const [count, setCount] = useState(12);
+
+  useEffect(() => {
+    toast.info(
+      "Whenever you get to the list's bottom you can scroll up to load more todos"
+    );
+  }, []);
 
   function loadMore() {
     if (!props.isLoading) {
@@ -85,7 +91,6 @@ const NoteRefetchContainer = createRefetchContainer(
               _id
               content
               title
-              important
             }
           }
           pageInfo {
