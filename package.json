@@ -5,7 +5,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "server:dev": "yarn workspace server dev"
+    "server:dev": "yarn workspace server dev",
+    "web:dev": "yarn workspace web start",
+    "schema": "yarn workspace server schema",
+    "server:build": "yarn workspace server build",
+    "web:build": "yarn workspace web build",
+    "setup": "node packages/server/dist/server.js"
   },
   "husky": {
     "hooks": {
